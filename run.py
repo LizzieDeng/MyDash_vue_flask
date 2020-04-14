@@ -35,6 +35,11 @@ def upload():
     return jsonify({'success': True})
 
 
+# @app.route('/api/getopt', methods=['GET', 'POST'])
+# def getOptions():
+
+
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):

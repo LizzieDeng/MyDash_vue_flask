@@ -18,7 +18,7 @@
   <component name="ProjectId" id="1aSo52NXkKqjCAnoSCorJoNtvRD" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Dash_imu_visualisation" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -34,6 +34,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python_Projects_All\MyDash_vue_flask-master\frontend\src\components" />
       <recent name="D:\Python_Projects_All\MyDash_vue_flask-master" />
       <recent name="D:\Python_Projects_All\MyDash_vue_flask-master\dist" />
       <recent name="D:\Python_projects_collect\MyDash_vue_flask\dist" />
@@ -106,6 +107,7 @@
       <workItem from="1586738169773" duration="1452000" />
       <workItem from="1586740146601" duration="13166000" />
       <workItem from="1586759508273" duration="8688000" />
+      <workItem from="1586824782136" duration="12380000" />
     </task>
     <servers />
   </component>

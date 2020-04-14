@@ -1,22 +1,20 @@
 <template>
   <div id="app">
-<!--    <img src="./assets/logo.png">-->
-<!--    <router-view/>-->
+    <!--<img src="./assets/logo.png">-->
+    <!--<router-view/>-->
     <Header></Header>
-    <div>
-      <TabContent></TabContent>
-      <pathGraph></pathGraph>
-    </div>
+    <TabContent></TabContent>
   </div>
 </template>
 
 <script>
+
 import Header from './components/Header'
 import TabContent from './components/TabContent'
-import pathGraph from './components/pathGraph'
 export default {
   name: 'App',
-  components: {Header, TabContent, pathGraph
+  components: {
+    Header, TabContent
   }
 }
 </script>

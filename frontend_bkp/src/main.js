@@ -6,14 +6,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
-import UUID from 'vue-uuid'
 
-Vue.use(UUID)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
-Vue.prototype.$ajax = axios
+Vue.prototype.$http = axios
+Vue.prototype.HOME = '/api'
 
-export const eventBus = new Vue()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

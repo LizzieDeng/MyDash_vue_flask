@@ -1,26 +1,23 @@
 <template>
-  <el-aside>
+       <el-aside>
                 <div id="tabs_style">
-                     <div v-if="fromuuid" class="alert" v-html="fromuuid"></div>
                      <!-- tab part data source -->
-                     <el-tabs type="border-card" style="height: 35vh; width: 300px" >
+                     <el-tabs type="border-card" style="height: 35vh" >
                             <el-tab-pane label="数据文件">
                                 <!-- 上传文件 -->
                                 <el-upload
                                   class="upload-demo"
                                   ref="upload"
-                                  action=""
+                                  action="https://jsonplaceholder.typicode.com/posts/"
                                   :before-upload="beforeAvatarUpload"
                                   :on-preview="handlePreview"
                                   :on-remove="handleRemove"
                                   :on-exceed="handleExceed"
-                                  :on-success="handleSuccess"
-                                  :http-request="uploadFile"
                                   :file-list="fileList"
                                   :limit="1"
                                   :multiple="false"
                                   :auto-upload="false">
-                                  <el-button slot="trigger" size="small" type="primary" plain>选取文件</el-button>
+                                  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
                                   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
                                   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                                 </el-upload>
@@ -42,37 +39,26 @@
                      </el-tabs>
                      <br>
                       <!-- tab part data control-->
-                     <el-tabs type="border-card" style="height: 60vh; width: 300px">
+                     <el-tabs type="border-card" style="height: 60vh;">
                         <el-tab-pane label="动态">
                             <!-- 步伐 -->
-                          <el-row>
-                                <span>步伐:</span>
-                                <el-select v-model="value" placeholder="请选择">
-                                  <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                  </el-option>
-                                </el-select>
-<!--                            <el-dropdown :hide-on-click="false">-->
-<!--                              <span class="el-dropdown-link">-->
-<!--                                步伐<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-<!--                              </span>-->
-<!--                              <el-dropdown-menu slot="dropdown">-->
-<!--                                <el-dropdown-item>200</el-dropdown-item>-->
-<!--                                <el-dropdown-item>400</el-dropdown-item>-->
-<!--                                <el-dropdown-item>800</el-dropdown-item>-->
-<!--                                <el-dropdown-item>1600</el-dropdown-item>-->
-<!--                                <el-dropdown-item>2000</el-dropdown-item>-->
-<!--                              </el-dropdown-menu>-->
-<!--                            </el-dropdown>-->
-                          </el-row>
-                          <el-row>
-                               <div id="draw_path_graph_btn">
-                                  <el-button type="primary" plain @click.native="drawPathGraph">画路径图</el-button>
-                              </div>
-                          </el-row>
+                            <el-dropdown>
+                                <span class="el-dropdown-link">
+                                步伐<i class="el-icon-arrow-down el-icon--right"></i>
+                                </span>
+                                <el-dropdown-menu slot="dropdown" >
+                                    <el-dropdown-item>200</el-dropdown-item>
+                                    <el-dropdown-item>400</el-dropdown-item>
+                                    <el-dropdown-item>800</el-dropdown-item>
+                                    <el-dropdown-item>1600</el-dropdown-item>
+                                    <el-dropdown-item>2000</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                            <el-row>
+                                 <div id="draw_path_graph_btn">
+                                    <el-button type="primary" plain @click.native="drawPathGraph">画路径图</el-button>
+                                </div>
+                            </el-row>
                         </el-tab-pane>
                         <el-tab-pane label="静态">
                              <div id="locate_nb" >
@@ -97,48 +83,39 @@
 </template>
 <script>
 import axios from 'axios'
-import {eventBus} from '../main'
-
 export default {
   data () {
     return {
       fileList: [],
-      options: [],
-      fromuuid: ''
+      formData: ''
     }
   },
   methods: {
-    created: function () {
-      eventBus.on('uuid', (message) => {
-        this.fromuuid = message
-        console.log('fromuuid:', message)
-        this.getOptions()
-      })
-    },
-    getOptions () {
-      axios.get('http://127.0.0.1:5000/api/getopt').then(response => (this.options = response.data.options))
-      // eslint-disable-next-line handle-callback-err
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },
-    handleSuccess (response, file, fileList) {
-      this.$message({
-        showClose: true,
-        message: '文件上传成功',
-        type: 'success'
-      })
+    handlePreview (file) {
+      console.log(file)
     },
-    uploadFile (file) {
+    handleExceed (files, fileList) {
+      this.$message.warning(`最多上传 ${files.length} 个文件`)
+    },
+    beforeAvatarUpload (file) {
+      console.log('beforeAvatarUpload')
+      const iscsv = file.type === 'application/vnd.ms-excel'
+      if (!iscsv) {
+        this.$message.error('上传文件只能是 Excel 格式!')
+      }
+      this.formData.append('file', file.file)
+    },
+    submitUpload () {
+      // this.$refs.upload.submit()
       let formData = new FormData()
-      console.log('file:', file)
-      console.log('submit:', file.file)
-      formData.append('file', file.file)
+      // formData.append('theme', this.theme)this.fileList[0].raw
+      console.log('submit:', this.fileList)
+      formData.append('file', this.fileList)
       axios({
-        url: 'http://127.0.0.1:5000/api/upload',
+        url: this.HOME + '/api/upload',
         method: 'post',
         data: formData,
         headers: {
@@ -153,40 +130,24 @@ export default {
       })
         .catch(err => {
           console.log(err)
-        }
-        )
-    },
-    handlePreview (file) {
-      console.log(file)
-    },
-    handleExceed (files, fileList) {
-      this.$message.warning(`最多上传 ${files.length} 个文件`)
-    },
-    beforeAvatarUpload (file) {
-      console.log('beforeAvatarUpload')
-      const iscsv = file.type === 'application/vnd.ms-excel'
-      if (!iscsv) {
-        this.$message.error('上传文件只能是 Excel 格式!')
-      }
-    },
-    submitUpload (file) {
-      this.$refs.upload.submit()
+        })
     }
   }}
 </script>
 
 <style>
+.el-aside {
+   width: 25vw;
+}
 #tabs_style {
+  width: 24vw;
   float: left;
   height: 98vh;
 }
-.el-input, .el-button,.el-row{
+.el-input, .el-button{
   margin-bottom:5px;
   margin-top:5px
 }
-/*.el-aside{*/
-/*  overflow: false*/
-/*}*/
 .span{
   float: left;
   margin-top: 5px;
