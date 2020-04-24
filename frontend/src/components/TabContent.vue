@@ -1,127 +1,103 @@
 <template>
-  <el-aside>
-                <div id="tabs_style">
-                     <div v-if="fromuuid" class="alert" v-html="fromuuid"></div>
-                     <!-- tab part data source -->
-                     <el-tabs type="border-card" style="height: 35vh; width: 300px" >
-                            <el-tab-pane label="数据文件">
-                                <!-- 上传文件 -->
-                                <el-upload
-                                  class="upload-demo"
-                                  ref="upload"
-                                  action=""
-                                  :before-upload="beforeAvatarUpload"
-                                  :on-preview="handlePreview"
-                                  :on-remove="handleRemove"
-                                  :on-exceed="handleExceed"
-                                  :on-success="handleSuccess"
-                                  :http-request="uploadFile"
-                                  :file-list="fileList"
-                                  :limit="1"
-                                  :multiple="false"
-                                  :auto-upload="false">
-                                  <el-button slot="trigger" size="small" type="primary" plain>选取文件</el-button>
-                                  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-                                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                                </el-upload>
-                            </el-tab-pane>
-                            <el-tab-pane label="数据流">
-                                 <!-- 输入栏-->
-                                <div id="file_flow">
-                                    <P>请输入服务器地址:</P>
-                                    <el-input/>
-                                </div>
-                                 <!-- 连接与断开按钮-->
-                                <div id="websocket_connect_btn">
-                                  <el-row>
-                                      <el-button type="primary" plain>连接</el-button>
-                                      <el-button type="primary" plain>断开</el-button>
-                                    </el-row>
-                                </div>
-                            </el-tab-pane>
-                     </el-tabs>
-                     <br>
-                      <!-- tab part data control-->
-                     <el-tabs type="border-card" style="height: 60vh; width: 300px">
-                        <el-tab-pane label="动态">
-                            <!-- 步伐 -->
-                          <el-row>
-                                <span>步伐:</span>
-                                <el-select v-model="value" placeholder="请选择">
-                                  <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                  </el-option>
-                                </el-select>
-<!--                            <el-dropdown :hide-on-click="false">-->
-<!--                              <span class="el-dropdown-link">-->
-<!--                                步伐<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-<!--                              </span>-->
-<!--                              <el-dropdown-menu slot="dropdown">-->
-<!--                                <el-dropdown-item>200</el-dropdown-item>-->
-<!--                                <el-dropdown-item>400</el-dropdown-item>-->
-<!--                                <el-dropdown-item>800</el-dropdown-item>-->
-<!--                                <el-dropdown-item>1600</el-dropdown-item>-->
-<!--                                <el-dropdown-item>2000</el-dropdown-item>-->
-<!--                              </el-dropdown-menu>-->
-<!--                            </el-dropdown>-->
-                          </el-row>
-                          <el-row>
-                               <div id="draw_path_graph_btn">
-                                  <el-button type="primary" plain @click.native="drawPathGraph">画路径图</el-button>
+   <!--  left tabs -->
+   <div id="tabs_style">
+                   <h3 class="'uuid">{{uuid}}</h3>
+                   <!-- tab part data source -->
+                   <el-tabs type="border-card" style="height: 35vh; width: 300px" >
+                          <el-tab-pane label="数据文件">
+                              <!-- 上传文件 -->
+                              <el-upload
+                                class="upload-demo"
+                                ref="upload"
+                                action=""
+                                :before-upload="beforeAvatarUpload"
+                                :on-preview="handlePreview"
+                                :on-remove="handleRemove"
+                                :on-exceed="handleExceed"
+                                :on-success="handleSuccess"
+                                :http-request="uploadFile"
+                                :file-list="fileList"
+                                :limit="1"
+                                :multiple="false"
+                                :auto-upload="false">
+                                <el-button slot="trigger" size="small" type="primary" plain>选取文件</el-button>
+                                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+                                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                              </el-upload>
+                          </el-tab-pane>
+                          <el-tab-pane label="数据流">
+                               <!-- 输入栏-->
+                              <div id="file_flow">
+                                  <P>请输入服务器地址:</P>
+                                  <el-input/>
                               </div>
+                               <!-- 连接与断开按钮-->
+                              <div id="websocket_connect_btn">
+                                <el-row>
+                                    <el-button type="primary" plain>连接</el-button>
+                                    <el-button type="primary" plain>断开</el-button>
+                                  </el-row>
+                              </div>
+                          </el-tab-pane>
+                   </el-tabs>
+                   <br>
+                    <!-- tab part data control-->
+                   <el-tabs type="border-card" style="height: 60vh; width: 300px">
+                      <el-tab-pane label="动态">
+                          <!-- 步伐 -->
+                        <el-row>
+                              <span>步伐:</span>
+                              <el-select v-model="value" placeholder="请选择" @change="selectStepGet">
+                                <el-option
+                                  v-for="item in options"
+                                  :key="item.value"
+                                  :label="item.label"
+                                  :value="item.value">
+                                </el-option>
+                              </el-select>
+                        </el-row>
+                        <el-row>
+                             <div id="draw_path_graph_btn">
+                                <el-button type="primary" plain @click.native="drawPathGraph">画路径图</el-button>
+                            </div>
+                        </el-row>
+                      </el-tab-pane>
+                      <el-tab-pane label="静态">
+                           <div id="locate_nb" >
+                              <p>定位:</p>
+                              <el-input/>
+                          </div>
+                          <div id="path_step">
+                             <p>步伐:</p>
+                              <el-input/>
+                          </div>
+                          <el-row>
+                                <el-button type="primary" plain>前进</el-button>
+                                <el-button type="primary" plain>后退</el-button>
                           </el-row>
-                        </el-tab-pane>
-                        <el-tab-pane label="静态">
-                             <div id="locate_nb" >
-                                <p>定位:</p>
-                                <el-input/>
-                            </div>
-                            <div id="path_step">
-                               <p>步伐:</p>
-                                <el-input/>
-                            </div>
-                            <el-row>
-                                  <el-button type="primary" plain>前进</el-button>
-                                  <el-button type="primary" plain>后退</el-button>
-                            </el-row>
-                            <el-checkbox>是否同步视角</el-checkbox>
-                        </el-tab-pane>
-                        <el-tab-pane label="时间">
-                        </el-tab-pane>
-                    </el-tabs>
-                </div>
-       </el-aside>
+                          <el-checkbox>是否同步视角</el-checkbox>
+                      </el-tab-pane>
+                      <el-tab-pane label="时间">
+                      </el-tab-pane>
+                  </el-tabs>
+              </div>
 </template>
 <script>
 import axios from 'axios'
-import {eventBus} from '../main'
+import {uuid} from 'vue-uuid'
+import event from '../event'
 
 export default {
   data () {
     return {
       fileList: [],
       options: [],
-      fromuuid: ''
+      value: '',
+      uuid: uuid.v1(),
+      step: ''
     }
   },
   methods: {
-    created: function () {
-      eventBus.on('uuid', (message) => {
-        this.fromuuid = message
-        console.log('fromuuid:', message)
-        this.getOptions()
-      })
-    },
-    getOptions () {
-      axios.get('http://127.0.0.1:5000/api/getopt').then(response => (this.options = response.data.options))
-      // eslint-disable-next-line handle-callback-err
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
     handleRemove (file, fileList) {
       console.log(file, fileList)
     },
@@ -137,6 +113,7 @@ export default {
       console.log('file:', file)
       console.log('submit:', file.file)
       formData.append('file', file.file)
+      formData.append('uuid', this.uuid)
       axios({
         url: 'http://127.0.0.1:5000/api/upload',
         method: 'post',
@@ -147,6 +124,12 @@ export default {
       }).then(res => {
         if (res.data.success) {
           alert('导入成功!')
+          this.getOptions(this.uuid)
+          // eventBus.on('uuid', (message) => {
+          //   this.fromuuid = message
+          //   console.log('fromuuid:', message)
+          //   this.getOptions(this.fromuuid)
+          // })
         } else {
           alert(res.data.message + ',' + res.data.data)
         }
@@ -171,6 +154,33 @@ export default {
     },
     submitUpload (file) {
       this.$refs.upload.submit()
+    },
+    getOptions (uuid) {
+      axios.post('http://127.0.0.1:5000/api/getopt',
+        {
+          'uuid': uuid
+        })
+        .then(response => (
+          this.options = response.data.options
+        ))
+      // eslint-disable-next-line handle-callback-err
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+    // 获取选中步伐
+    selectStepGet (step) {
+      let obj = this.options.find((item) => {
+        if (item.value === step) {
+          this.step = step
+        }
+        return item.value === step
+      })
+      console.log('obj', obj.value, this.step)
+    },
+    // 画路径图
+    drawPathGraph () {
+      event.$emit('drawPath', this.uuid)
     }
   }}
 </script>
@@ -184,9 +194,9 @@ export default {
   margin-bottom:5px;
   margin-top:5px
 }
-/*.el-aside{*/
-/*  overflow: false*/
-/*}*/
+h3{
+  display: none;
+}
 .span{
   float: left;
   margin-top: 5px;

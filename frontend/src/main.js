@@ -7,13 +7,16 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import UUID from 'vue-uuid'
+import VueCookies from 'vue-cookies'
 
 Vue.use(UUID)
 Vue.use(ElementUI)
+// Vue.use(Plotly)
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
-
+Vue.use(VueCookies)
 export const eventBus = new Vue()
+// Vue.prototype.$eventBus = new Vue()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

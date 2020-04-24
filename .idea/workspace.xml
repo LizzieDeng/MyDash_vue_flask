@@ -18,7 +18,7 @@
   <component name="ProjectId" id="1aSo52NXkKqjCAnoSCorJoNtvRD" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Dash_imu_visualisation" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -34,11 +34,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python_Projects_All\MyDash_vue_flask-master\backend\data" />
       <recent name="D:\Python_Projects_All\MyDash_vue_flask-master\frontend\src\components" />
       <recent name="D:\Python_Projects_All\MyDash_vue_flask-master" />
       <recent name="D:\Python_Projects_All\MyDash_vue_flask-master\dist" />
       <recent name="D:\Python_projects_collect\MyDash_vue_flask\dist" />
-      <recent name="D:\Python_projects_collect\MyDash_vue_flask\frontend\src\components" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -54,13 +54,35 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.run">
-    <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MyDash_vue_flask-master/frontend/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
     <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MyDash_vue_flask-master/frontend/dist/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MyDash_vue_flask-master/dist/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="pathGraph.vue" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MyDash_vue_flask-master/frontend/src/components/pathGraph.vue" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="3.沪深港通(十大成交股)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MyDash_vue_flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3.沪深港通(十大成交股).py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -88,9 +110,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.run" />
+        <item itemvalue="JavaScript Debug.pathGraph.vue" />
+        <item itemvalue="Python.3.沪深港通(十大成交股)" />
         <item itemvalue="JavaScript Debug.index.html (2)" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="JavaScript Debug.index.html (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -108,6 +131,10 @@
       <workItem from="1586740146601" duration="13166000" />
       <workItem from="1586759508273" duration="8688000" />
       <workItem from="1586824782136" duration="12380000" />
+      <workItem from="1586911539418" duration="28109000" />
+      <workItem from="1586998466664" duration="1529000" />
+      <workItem from="1587011810779" duration="1798000" />
+      <workItem from="1587359018027" duration="35091000" />
     </task>
     <servers />
   </component>
@@ -115,6 +142,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MyDash_vue_flask_master$run.coverage" NAME="run Coverage Results" MODIFIED="1586765652538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyDash_vue_flask_master$3___.coverage" NAME="3.沪深港通(十大成交股) Coverage Results" MODIFIED="1587364621993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyDash_vue_flask_master$run.coverage" NAME="run Coverage Results" MODIFIED="1587692196290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
